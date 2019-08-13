@@ -1,38 +1,34 @@
 import 'package:flutter/material.dart';
 
-class Products {
+class ProductState {
   List<Product> productList;
 
-  Products({
+  ProductState({
     this.productList,
   });
 
-  Products copyWith({List<Product> productList}) {
-    return new Products(
+  ProductState copyWith({List<Product> productList}) {
+    return new ProductState(
       productList: productList ?? this.productList,
     );
   }
 
-  Products.initialState() : productList = List.unmodifiable(<Product>[]);
+  ProductState.initialState() : productList = List.unmodifiable(<Product>[]);
 
-  // static Products fromJson(dynamic json) => Products(
-  //       productList: List<Product>.from(
-  //           json["productList"].map((x) => Product.fromJson(x))),
-  //     );
-
-  factory Products.fromJson(Map<String, dynamic> json) => new Products(
-        productList: new List<Product>.from(
-            json["productList"].map((x) => Product.fromJson(x))),
+  factory ProductState.fromJSON(Map<String, dynamic> json) => ProductState(
+        productList: List<Product>.from(
+            json["productList"].map((x) => Product.fromJSON(x))),
       );
 
-  // dynamic toJson() => {
-  //       'productList':
-  //           List<dynamic>.from(productList?.map((x) => x.toJson() ?? [])),
-  //     };
   Map<String, dynamic> toJson() => {
-        "productList":
-            List<dynamic>.from(productList?.map((x) => x.toJson() ?? [])),
+        "productList": List<dynamic>.from(
+            productList?.map((product) => product.toJSON() ?? [])),
       };
+
+  @override
+  String toString() {
+    return '{productList: $productList, }';
+  }
 }
 
 class Product {
@@ -56,30 +52,22 @@ class Product {
         quantity: quantity ?? this.quantity);
   }
 
-  // static Product fromJson(dynamic json) => Product(
-  //       id: json["id"],
-  //       productName: json["productName"],
-  //       price: json["price"],
-  //       quantity: json["quantity"],
-  //     );
+  Map<String, dynamic> toJSON() => <String, dynamic>{
+        'id': this.id,
+        'productName': this.productName,
+        'price': this.price,
+        'quantity': this.quantity
+      };
 
-  // dynamic toJson() => {
-  //       "id": id,
-  //       "productName": productName,
-  //       "price": price,
-  //       "quantity": quantity,
-  //     };
-  factory Product.fromJson(Map<String, dynamic> json) => new Product(
+  factory Product.fromJSON(Map<String, dynamic> json) => Product(
         id: json["id"],
         productName: json["productName"],
         price: json["price"],
         quantity: json["quantity"],
       );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "productName": productName,
-        "price": price,
-        "quantity": quantity,
-      };
+  @override
+  String toString() {
+    return '{id: $id, productName: $productName, price: $price, quantity: $quantity }';
+  }
 }

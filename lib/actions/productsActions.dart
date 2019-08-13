@@ -12,4 +12,4 @@ class DeleteProduct {
   DeleteProduct(this.id);
 }
 
-class DeleteAllProducts {}
+class ClearProductList {}

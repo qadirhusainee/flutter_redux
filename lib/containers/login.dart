@@ -31,7 +31,16 @@ class _LoginPageState extends State<LoginPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        leading: Center(
+          child: Text('AllWays',
+              style: TextStyle(color: Theme.of(context).primaryColor)),
+        ),
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        title: Text(
+          widget.title,
+          style: TextStyle(color: Theme.of(context).primaryColor),
+        ),
       ),
       body: buildBody(width, height),
     );
@@ -45,47 +54,55 @@ class _LoginPageState extends State<LoginPage> {
                 Center(
                   child: Container(
                     width: width * 0.7,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                            margin: EdgeInsets.only(bottom: height * 0.1),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  "Welcome,",
-                                  style: TextStyle(
-                                    fontSize: 30,
-                                    color: Colors.redAccent,
-                                  ),
+                    child: ScrollConfiguration(
+                      behavior: ScrollBehavior(),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                                margin: EdgeInsets.only(bottom: height * 0.1),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      "Welcome,",
+                                      style: TextStyle(
+                                        fontSize: 30,
+                                        color: Theme.of(context).primaryColor,
+                                      ),
+                                    ),
+                                    Text(
+                                      "Sign in to continue",
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        color: Theme.of(context).accentColor,
+                                      ),
+                                    ),
+                                  ],
+                                )),
+                            Container(
+                              margin: EdgeInsets.only(bottom: height * 0.05),
+                              decoration: BoxDecoration(),
+                              child: Form(
+                                key: formKey,
+                                child: Column(
+                                  children: <Widget>[
+                                    buildTextUsername(),
+                                    buildTextPassword(viewModel),
+                                  ],
                                 ),
-                                Text(
-                                  "Sign in to continue",
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                              ],
-                            )),
-                        Container(
-                          margin: EdgeInsets.only(bottom: height * 0.05),
-                          decoration: BoxDecoration(),
-                          child: Form(
-                            key: formKey,
-                            child: Column(
-                              children: <Widget>[
-                                buildTextUsername(),
-                                buildTextPassword(viewModel),
-                              ],
+                              ),
                             ),
-                          ),
+                            RaisedButton(
+                              onPressed: () {
+                                onSubmit(viewModel, context);
+                              },
+                              child: Text("Login"),
+                            ),
+                          ],
                         ),
-                        RaisedButton(
-                          onPressed: () {
-                            onSubmit(viewModel, context);
-                          },
-                          child: Text("Login"),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
                 ),
@@ -172,7 +189,7 @@ class _ViewModel {
 
   factory _ViewModel.create(Store<AppState> store) {
     _onSetUser(username, password, BuildContext context) {
-      store.dispatch(login(context, username, password));
+      return store.dispatch(login(context, username, password));
     }
 
     return _ViewModel(

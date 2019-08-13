@@ -5,32 +5,41 @@ import 'package:basic_flutter/models/authState.dart';
 
 class AppState {
   AuthState authState;
-  //Products products;
+  ProductState productState;
 
   AppState({
     @required this.authState,
-    // @required this.products,
+    @required this.productState,
   });
 
   AppState copyWith({User user}) {
-    return AppState(authState: authState ?? this.authState);
+    return AppState(
+        authState: authState ?? this.authState,
+        productState: productState ?? this.productState);
   }
 
-  AppState.initialState() : authState = AuthState.initialState();
+  AppState.initialState()
+      : authState = AuthState.initialState(),
+        productState = ProductState.initialState();
 
   static AppState fromJson(dynamic json) {
     AuthState initAuthState = json == null
         ? AuthState.initialState()
         : AuthState.fromJSON(json['authState']);
-    return AppState(authState: initAuthState);
+    ProductState initProductState = json == null
+        ? ProductState.initialState()
+        : ProductState.fromJSON(json['productState']);
+    return AppState(authState: initAuthState, productState: initProductState);
   }
 
-  Map<String, dynamic> toJson() => {'authState': authState.toJSON()};
+  Map<String, dynamic> toJson() =>
+      {'authState': authState.toJSON(), 'productState': productState.toJson()};
 
   @override
   String toString() {
     return '''AppState{
             authState: $authState,
+            productState: $productState
         }''';
   }
 }

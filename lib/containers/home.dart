@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:basic_flutter/common/mainDrawer.dart';
+
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -8,6 +10,7 @@ class HomePage extends StatelessWidget {
       body: Center(
         child: Text("Home"),
       ),
+      drawer: MainDrawer(),
     );
   }
 }
