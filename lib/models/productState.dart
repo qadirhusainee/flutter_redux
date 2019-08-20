@@ -13,7 +13,7 @@ class ProductState {
     );
   }
 
-  ProductState.initialState() : productList = List.unmodifiable(<Product>[]);
+  ProductState.initialState() : productList = [];
 
   factory ProductState.fromJSON(Map<String, dynamic> json) => ProductState(
         productList: List<Product>.from(
@@ -21,13 +21,12 @@ class ProductState {
       );
 
   Map<String, dynamic> toJson() => {
-        "productList": List<dynamic>.from(
-            productList?.map((product) => product.toJSON() ?? [])),
+        "productList": [],
       };
 
   @override
   String toString() {
-    return '{productList: $productList, }';
+    return '{productList: $productList}';
   }
 }
 
@@ -52,7 +51,7 @@ class Product {
         quantity: quantity ?? this.quantity);
   }
 
-  Map<String, dynamic> toJSON() => <String, dynamic>{
+  Map<String, dynamic> toJson() => <String, dynamic>{
         'id': this.id,
         'productName': this.productName,
         'price': this.price,

@@ -31,10 +31,6 @@ class _LoginPageState extends State<LoginPage> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: Center(
-          child: Text('AllWays',
-              style: TextStyle(color: Theme.of(context).primaryColor)),
-        ),
         backgroundColor: Colors.white,
         centerTitle: true,
         title: Text(
@@ -172,7 +168,6 @@ class _LoginPageState extends State<LoginPage> {
         }
         return null;
       },
-      autofocus: true,
       onSaved: (val) => _username = val,
       decoration: InputDecoration(
           labelText: "Username",

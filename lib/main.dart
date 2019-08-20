@@ -8,6 +8,8 @@ import 'package:basic_flutter/models/appState.dart';
 import 'package:basic_flutter/containers/login.dart';
 import 'package:basic_flutter/reducers/appReducer.dart';
 import 'package:basic_flutter/containers/home.dart';
+import 'package:basic_flutter/containers/profile.dart';
+import 'package:basic_flutter/containers/setting.dart';
 import 'package:basic_flutter/middleware/middleware.dart';
 
 void main() async {
@@ -44,15 +46,16 @@ class BuiltReduxApp extends StatelessWidget {
                   buttonColor: MatrialSecondaryColor,
                   textTheme: ButtonTextTheme.primary)),
           routes: {
-            '/': (BuildContext context) =>
-                new StoreConnector<AppState, dynamic>(
-                    converter: (store) => store.state.authState.isAuthenticated,
-                    builder: (BuildContext context, isAuthenticated) =>
-                        isAuthenticated == false
-                            ? new LoginPage(title: "Login")
-                            : new HomePage()),
+            '/': (BuildContext context) => StoreConnector<AppState, dynamic>(
+                converter: (store) => store.state.authState.isAuthenticated,
+                builder: (BuildContext context, isAuthenticated) =>
+                    isAuthenticated == false
+                        ? LoginPage(title: "Login")
+                        : HomePage()),
             '/home': (context) => HomePage(),
-            '/login': (context) => LoginPage(title: "Login")
+            '/login': (context) => LoginPage(title: "Login"),
+            '/profile': (context) => ProfileScreen(),
+            '/setting': (context) => SettingScreen(),
           },
         ));
   }

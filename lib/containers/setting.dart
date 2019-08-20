@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 
 import 'package:basic_flutter/common/mainDrawer.dart';
 
-class HomePage extends StatelessWidget {
+class SettingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Home")),
+      appBar: AppBar(title: Text("Setting")),
       body: Center(
-        child: Text("Home"),
+        child: Text("Setting"),
       ),
-      drawer: MainDrawer('home'),
+      drawer: MainDrawer('setting'),
     );
   }
 }

@@ -26,7 +26,7 @@ final Function login =
   return (Store<AppState> store) async {
     try {
       store.dispatch(UserLoginRequest());
-      final jsonData = await fetch('login');
+      final jsonData = await fetch('login_flutter');
       User userDetails =
           User.fromJSON(jsonData); // convert from json to User object
       if (username == 'qadir' && password == 'qadirhusainee') {
