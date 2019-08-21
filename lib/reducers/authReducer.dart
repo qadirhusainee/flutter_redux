@@ -2,6 +2,7 @@ import 'package:redux/redux.dart';
 
 import 'package:basic_flutter/actions/authActions.dart';
 import 'package:basic_flutter/models/authState.dart';
+import 'package:basic_flutter/models/userState.dart';
 
 Reducer<AuthState> authReducer = combineReducers([
   new TypedReducer<AuthState, UserLoginRequest>(userLoginRequestReducer),
@@ -28,5 +29,5 @@ AuthState userLoginFailureReducer(AuthState auth, UserLoginFailure action) {
 }
 
 AuthState userLogoutReducer(AuthState auth, UserLogout action) {
-  return AuthState.initialState();
+  return auth.copyWith(isAuthenticated: false, user: User.initialState());
 }

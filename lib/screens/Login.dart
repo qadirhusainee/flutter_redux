@@ -3,7 +3,6 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 
 import 'package:basic_flutter/models/appState.dart';
-import 'package:basic_flutter/models/userState.dart';
 import 'package:basic_flutter/actions/authActions.dart';
 
 class LoginPage extends StatefulWidget {

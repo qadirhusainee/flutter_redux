@@ -5,11 +5,12 @@ import 'package:redux_persist_flutter/redux_persist_flutter.dart';
 import 'package:redux/redux.dart';
 
 import 'package:basic_flutter/models/appState.dart';
-import 'package:basic_flutter/containers/login.dart';
+import 'package:basic_flutter/screens/Login.dart';
 import 'package:basic_flutter/reducers/appReducer.dart';
-import 'package:basic_flutter/containers/home.dart';
-import 'package:basic_flutter/containers/profile.dart';
-import 'package:basic_flutter/containers/setting.dart';
+import 'package:basic_flutter/screens/Home.dart';
+import 'package:basic_flutter/screens/Profile.dart';
+import 'package:basic_flutter/screens/Setting.dart';
+import 'package:basic_flutter/screens/AddProduct.dart';
 import 'package:basic_flutter/middleware/middleware.dart';
 
 void main() async {
@@ -56,6 +57,7 @@ class BuiltReduxApp extends StatelessWidget {
             '/login': (context) => LoginPage(title: "Login"),
             '/profile': (context) => ProfileScreen(),
             '/setting': (context) => SettingScreen(),
+            '/addProduct': (context) => AddProduct()
           },
         ));
   }

@@ -21,6 +21,22 @@ class UserLoginFailure {
 
 class UserLogout {}
 
+// TODO: Extract to common file
+final Function buildSnackbar = (String text) {
+  return SnackBar(
+    backgroundColor: Colors.red,
+    content: Text(text),
+    duration: Duration(seconds: 5),
+    action: SnackBarAction(
+      textColor: Colors.white,
+      label: 'Ok',
+      onPressed: () {
+        // Some code to undo the change.
+      },
+    ),
+  );
+};
+
 final Function login =
     (BuildContext context, String username, String password) {
   return (Store<AppState> store) async {
@@ -33,6 +49,8 @@ final Function login =
         store.dispatch(UserLoginSuccess(userDetails));
         Navigator.of(context).pushReplacementNamed('/home');
       } else {
+        Scaffold.of(context)
+            .showSnackBar(buildSnackbar('Wrong Username or Password'));
         store
             .dispatch(UserLoginFailure('Username or password were incorrect.'));
       }

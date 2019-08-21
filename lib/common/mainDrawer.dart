@@ -53,7 +53,7 @@ class MainDrawer extends StatelessWidget {
                         ListTile(
                           onTap: () {
                             print('signout');
-                            viewModel.onLogout();
+                            viewModel.onLogout(context);
                           },
                           leading: Icon(Icons.exit_to_app),
                           title: Text("Sign Out"),
@@ -66,13 +66,13 @@ class MainDrawer extends StatelessWidget {
 }
 
 class _ViewModel {
-  final Function() onLogout;
+  final Function(BuildContext context) onLogout;
 
   _ViewModel({this.onLogout});
 
   factory _ViewModel.create(Store<AppState> store) {
-    _onLogout() {
-      return store.dispatch(logout());
+    _onLogout(BuildContext context) {
+      return store.dispatch(logout(context));
     }
 
     return _ViewModel(onLogout: _onLogout);

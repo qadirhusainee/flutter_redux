@@ -2,31 +2,34 @@ import 'package:flutter/material.dart';
 
 class ProductState {
   List<Product> productList;
+  bool loading;
 
-  ProductState({
-    this.productList,
-  });
+  ProductState({this.productList, this.loading});
 
   ProductState copyWith({List<Product> productList}) {
-    return new ProductState(
-      productList: productList ?? this.productList,
-    );
+    return ProductState(
+        productList: productList ?? this.productList,
+        loading: loading ?? this.loading);
   }
 
-  ProductState.initialState() : productList = [];
+  ProductState.initialState()
+      : productList = List.unmodifiable(<Product>[]),
+        loading = false;
 
   factory ProductState.fromJSON(Map<String, dynamic> json) => ProductState(
-        productList: List<Product>.from(
-            json["productList"].map((x) => Product.fromJSON(x))),
-      );
+      productList: List<Product>.from(
+          json["productList"].map((x) => Product.fromJSON(x))),
+      loading: json['loading']);
 
   Map<String, dynamic> toJson() => {
-        "productList": [],
+        "productList": List<dynamic>.from(
+            productList?.map((product) => product.toJson() ?? [])),
+        "loading": this.loading
       };
 
   @override
   String toString() {
-    return '{productList: $productList}';
+    return '{productList: $productList, loading: $loading}';
   }
 }
 
