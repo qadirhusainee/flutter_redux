@@ -131,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
       validator: (value) {
         return passwordValidator(value);
       },
-      onFieldSubmitted: (term) {
+      onFieldSubmitted: (value) {
         onSubmit(viewModel, context);
       },
       onSaved: (val) => _password = val,
@@ -158,7 +158,7 @@ class _LoginPageState extends State<LoginPage> {
       focusNode: _usernameFocus,
       textInputAction: TextInputAction.next,
       onFieldSubmitted: (term) {
-        _usernameFocus.unfocus();
+        // _usernameFocus.unfocus();
         FocusScope.of(context).requestFocus(_passwordFocus);
       },
       validator: (value) {
